@@ -6,10 +6,15 @@ const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+//apollo server
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware
 });
+
+//apply apollo server with express app
+server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
