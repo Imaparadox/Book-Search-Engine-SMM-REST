@@ -1,4 +1,4 @@
-const { User, Books } = require('../models');
+const { User } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -12,23 +12,23 @@ const resolvers = {
             }
             throw new AuthenticationError('Not logged in');
         },
-        // returns all books
-        books: async (parent, { username }) => {
-            const params = username ? { username } : {};
-            return Book.find();
-        },
-        // returns a single book
-        book: async (parent, { bookId }) => {
-            return Book.findOne({ bookId });
-        },
-        // returns all users
-        users: async () => {
-            return User.find().select("-__v -password").populate("savedBooks");
-        },
-        // return single user
-        user: async (parent, { username }) => {
-            return User.findOne({ username }).select("-__v -password").populate('savedBooks');
-        },
+        // // returns all books
+        // books: async (parent, { username }) => {
+        //     const params = username ? { username } : {};
+        //     return Book.find();
+        // },
+        // // returns a single book
+        // book: async (parent, { bookId }) => {
+        //     return Book.findOne({ bookId });
+        // },
+        // // returns all users
+        // users: async () => {
+        //     return User.find().select("-__v -password").populate("savedBooks");
+        // },
+        // // return single user
+        // user: async (parent, { username }) => {
+        //     return User.findOne({ username }).select("-__v -password").populate('savedBooks');
+        // },
     },
     Mutation: {
         addUser: async (parent, args) => {
